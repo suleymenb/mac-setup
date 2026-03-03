@@ -1,0 +1,33 @@
+- name: Ensure Homebrew is installed
+  shell: |
+    set -euo pipefail
+    if ! command -v brew >/dev/null 2>&1; then
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+  args:
+    executable: /bin/bash
+  changed_when: false
+
+- name: Install brew formulae
+  community.general.homebrew:
+    name:
+      - fzf
+      - eza
+    state: present
+    update_homebrew: false
+
+- name: Install brew casks
+  community.general.homebrew_cask:
+    name:
+      - rectangle
+      - stats
+      - font-jetbrains-mono
+    state: present
+
+- name: Run fzf install
+  shell: |
+    set -euo pipefail
+    "$(/usr/bin/env brew --prefix)/opt/fzf/install" --all --no-bash --no-fish
+  args:
+    executable: /bin/bash
+  changed_when: false

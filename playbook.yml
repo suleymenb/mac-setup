@@ -1,0 +1,10 @@
+- name: Mac setup
+  hosts: mac
+  gather_facts: true
+  become: false
+
+  roles:
+    - role: homebrew
+      tags: [homebrew]
+    - role: zsh
+      tags: [zsh]
