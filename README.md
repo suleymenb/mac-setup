@@ -15,7 +15,7 @@ in a reproducible and idempotent way.
 If Command Line Tools are not installed, run:
 
 ```
-xcode-select --install
+sudo softwareupdate --install -a --recommended
 ```
 
 Wait until installation completes before continuing.
