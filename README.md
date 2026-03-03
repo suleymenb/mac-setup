@@ -56,6 +56,7 @@ Core Tooling:
 - Homebrew
 - pipx
 - ansible-core
+- Terraform
 
 Applications:
 - iTerm2
