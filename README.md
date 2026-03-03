@@ -15,7 +15,7 @@ in a reproducible and idempotent way.
 If Command Line Tools are not installed, run:
 
 ```
-sudo softwareupdate --install -a --recommended
+sudo touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress && sudo softwareupdate --install --recommended
 ```
 
 Wait until installation completes before continuing.
