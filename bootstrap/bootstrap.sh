@@ -64,20 +64,8 @@ fi
 log "Installing required Ansible collections"
 ansible-galaxy collection install community.general
 
-# --- 4) Clone repo + run playbook ---
-# REPLACE THIS WITH YOUR ACTUAL REPOSITORY URL:
-REPO_URL="https://github.com/<your-username>/mac-setup.git"
-REPO_DIR="$HOME/mac-setup"
-
-log "Cloning or updating repository"
-if [[ -d "$REPO_DIR/.git" ]]; then
-  git -C "$REPO_DIR" pull --ff-only
-else
-  git clone "$REPO_URL" "$REPO_DIR"
-fi
-
+# --- 4) Run playbook ---
 log "Running Ansible playbook"
-cd "$REPO_DIR"
 ansible-galaxy collection install -r requirements.yml
 ansible-playbook playbook.yml
 
