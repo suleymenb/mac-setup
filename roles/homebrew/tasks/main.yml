@@ -19,6 +19,7 @@
 - name: Install brew casks
   community.general.homebrew_cask:
     name:
+      - iterm2
       - rectangle
       - stats
       - font-jetbrains-mono
