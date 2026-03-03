@@ -1,4 +1,4 @@
-- name: Ensure Homebrew is installed
+- name: Ensure Homebrew is installed (best-effort)
   shell: |
     set -euo pipefail
     if ! command -v brew >/dev/null 2>&1; then
@@ -7,6 +7,11 @@
   args:
     executable: /bin/bash
   changed_when: false
+
+- name: Tap homebrew/cask-fonts
+  community.general.homebrew_tap:
+    name: homebrew/cask-fonts
+    state: present
 
 - name: Install brew formulae
   community.general.homebrew:
@@ -23,6 +28,7 @@
       - rectangle
       - stats
       - font-jetbrains-mono
+      - font-meslo-lg-nerd-font
     state: present
 
 - name: Run fzf install
