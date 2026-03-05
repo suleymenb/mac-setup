@@ -104,3 +104,12 @@ ansible-playbook playbook.yml
 - Version-controlled system setup
 
 This repository serves as a reproducible macOS baseline for development environments.
+
+---
+
+TO DO
+- [ ] Add
+    - [ ] vimdiff
+    - [ ] du-dust
+    - [ ] midnight commander
+
