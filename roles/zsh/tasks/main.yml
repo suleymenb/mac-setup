@@ -131,6 +131,6 @@
 
 - name: Ensure midnight commander is installed via homebrew
   community.general.homebrew:
-    name: midnight-commander
+    name: mc
     state: present
     update_homebrew: false
