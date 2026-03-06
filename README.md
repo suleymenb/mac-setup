@@ -174,6 +174,7 @@ You can customize your setup by editing:
 
 - [ ] TO DO
   - [ ] add GoLang (https://zed.dev/docs/languages/go)
+  - [ ] install Zed Editor (brew install --cask zed)
 
 ---
 
