@@ -109,7 +109,6 @@ This repository serves as a reproducible macOS baseline for development environm
 
 TO DO
 - [ ] Add
-    - [ ] vimdiff
-    - [ ] du-dust
-    - [ ] midnight commander
-
+    - [x] vimdiff
+    - [x] du-dust (`cargo install du-dust`)
+    - [x] midnight commander

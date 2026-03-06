@@ -1,3 +1,4 @@
+# Oh My Zsh Installation
 - name: Install Oh My Zsh if missing
   shell: |
     set -euo pipefail
@@ -8,6 +9,7 @@
     executable: /bin/bash
   changed_when: false
 
+# Oh My Zsh Themes
 - name: Ensure powerlevel10k theme present (Oh My Zsh custom theme)
   git:
     repo: https://github.com/romkatv/powerlevel10k.git
@@ -15,6 +17,7 @@
     depth: 1
     version: master
 
+# Oh My Zsh Plugins
 - name: Ensure zsh-autosuggestions present
   git:
     repo: https://github.com/zsh-users/zsh-autosuggestions.git
@@ -29,6 +32,7 @@
     depth: 1
     version: master
 
+# ZSH Configuration
 - name: Ensure ZSH env var is set
   lineinfile:
     path: "{{ ansible_env.HOME }}/.zshrc"
@@ -68,6 +72,7 @@
       zstyle ':omz:update' frequency 1
       COMPLETION_WAITING_DOTS="true"
 
+# ZSH Aliases & Functions
 - name: Add aliases block (your .zshrc)
   blockinfile:
     path: "{{ ansible_env.HOME }}/.zshrc"
@@ -89,6 +94,7 @@
         dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
       }
 
+# ZSH Integrations
 - name: Ensure p10k config is sourced (your .zshrc)
   lineinfile:
     path: "{{ ansible_env.HOME }}/.zshrc"
@@ -117,3 +123,25 @@
     block: |
       { brew update && brew upgrade && brew cleanup; } >/dev/null 2>&1
   tags: [brew_autoupdates]
+
+# Terminal Tools
+- name: Ensure du-dust is installed via cargo
+  shell: |
+    if ! command -v dust >/dev/null 2>&1; then
+      cargo install du-dust
+    fi
+  args:
+    executable: /bin/bash
+  changed_when: false
+
+- name: Ensure vimdiff is installed via homebrew
+  community.general.homebrew:
+    name: vim
+    state: present
+    update_homebrew: false
+
+- name: Ensure midnight commander is installed via homebrew
+  community.general.homebrew:
+    name: midnight-commander
+    state: present
+    update_homebrew: false
