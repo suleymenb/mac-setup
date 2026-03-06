@@ -1,7 +1,7 @@
 # Mac Setup – Fully Automated macOS Bootstrap with Ansible
 
 This repository provides a fully automated macOS setup using Ansible.
-It installs Homebrew, Ansible, Zsh configuration, and preferred applications
+It installs Homebrew, development tools, Rust, Zsh configuration, and preferred applications
 in a reproducible and idempotent way.
 
 ---
@@ -36,13 +36,13 @@ It should return:
 
 Run this on a fresh macOS machine:
 
-Main Branch
+**Main Branch:**
 
 ```
 git clone https://github.com/suleymenb/mac-setup.git && cd mac-setup && chmod +x bootstrap/bootstrap.sh && ./bootstrap/bootstrap.sh
 ```
 
-Dev Branch
+**Dev Branch:**
 
 ```
 git clone -b dev https://github.com/suleymenb/mac-setup.git && cd mac-setup && chmod +x bootstrap/bootstrap.sh && ./bootstrap/bootstrap.sh
@@ -58,26 +58,33 @@ This will:
 6. Execute the Ansible playbook
 7. Configure your macOS environment automatically
 
-## What This Setup Configures
+---
 
-Core Tooling:
+## 3. What This Setup Configures
+
+### Core Tooling
 - Homebrew
 - pipx
 - ansible-core
 - Terraform
+- Rust
 
-Applications:
+### Applications
 - iTerm2
 - Rectangle
 - Stats
 
-CLI Tools:
+### CLI Tools
 - eza
+- vim (vimdiff)
+- midnight commander
+- du-dust (via cargo)
 
-Fonts:
+### Fonts
 - JetBrains Mono
+- Meslo LG Nerd Font
 
-Shell Configuration:
+### Shell Configuration
 - Oh My Zsh
 - Powerlevel10k theme
 - Plugins:
@@ -85,11 +92,44 @@ Shell Configuration:
   - sudo
   - zsh-autosuggestions
   - zsh-syntax-highlighting
-- Custom aliases
+- Custom aliases:
+  - `rz` - reload zshrc
+  - `ls` - eza with icons and grouped directories
+  - `ll` - eza long format with all files and icons
+- Cargo bin directory added to PATH
+
+### System Customization
+- Dark mode enablement
+- Finder hidden files visibility
+- Brew auto-updates
 
 ---
 
-## Updating Your System
+## 4. Project Structure
+
+```
+mac-setup/
+├── bootstrap/
+│   └── bootstrap.sh          # Initial setup script
+├── roles/
+│   ├── homebrew/
+│   │   └── tasks/
+│   │       └── main.yml      # Homebrew, casks, and Rust installation
+│   ├── zsh/
+│   │   └── tasks/
+│   │       └── main.yml      # Oh My Zsh, plugins, aliases, and cargo tools
+│   └── system/
+│       └── tasks/
+│           └── main.yml      # macOS system customization
+├── playbook.yml              # Main Ansible playbook
+├── inventory.ini             # Ansible inventory
+├── ansible.cfg               # Ansible configuration
+└── README.md                 # This file
+```
+
+---
+
+## 5. Updating Your System
 
 To update your configuration:
 
@@ -99,22 +139,39 @@ git pull
 ansible-playbook playbook.yml
 ```
 
+Or run specific roles with tags:
+
+```
+ansible-playbook playbook.yml --tags homebrew
+ansible-playbook playbook.yml --tags zsh
+ansible-playbook playbook.yml --tags system
+```
+
 ---
 
-## Design Principles
+## 6. Design Principles
 
-- Idempotent configuration
-- Reproducible environment
-- Infrastructure-as-Code approach
-- Clean separation between bootstrap and configuration
-- Version-controlled system setup
+- **Idempotent configuration** - Safe to run multiple times
+- **Reproducible environment** - Same setup every time
+- **Infrastructure-as-Code approach** - Everything is version controlled
+- **Clean separation of concerns** - Organized by role (homebrew, zsh, system)
+- **Version-controlled system setup** - Track all changes in git
 
 This repository serves as a reproducible macOS baseline for development environments.
 
 ---
 
-TO DO
-- [ ] Add
-    - [x] vimdiff
-    - [x] du-dust (`cargo install du-dust`)
-    - [x] midnight commander
+## 7. Customization
+
+You can customize your setup by editing:
+
+- `roles/homebrew/tasks/main.yml` - Add/remove packages and casks
+- `roles/zsh/tasks/main.yml` - Modify shell configuration, aliases, and cargo tools
+- `roles/system/tasks/main.yml` - Add more macOS system customizations
+- `playbook.yml` - Include/exclude roles
+
+---
+
+## License
+
+MIT
