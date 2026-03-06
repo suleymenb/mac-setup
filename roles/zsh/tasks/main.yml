@@ -83,30 +83,12 @@
       alias ls="eza --icons --group-directories-first"
       alias ll="eza -lah --icons --group-directories-first"
 
-- name: Add fcd function block (your .zshrc)
-  blockinfile:
-    path: "{{ ansible_env.HOME }}/.zshrc"
-    marker: "# {mark} ANSIBLE_FCD"
-    create: true
-    block: |
-      fcd() {
-        local dir
-        dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
-      }
-
 # ZSH Integrations
 - name: Ensure p10k config is sourced (your .zshrc)
   lineinfile:
     path: "{{ ansible_env.HOME }}/.zshrc"
     regexp: '^\[\[ ! -f ~\/\.p10k\.zsh \]\] \|\| source ~\/\.p10k\.zsh$'
     line: "[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh"
-    create: true
-
-- name: Ensure fzf shell integration is sourced (your .zshrc)
-  lineinfile:
-    path: "{{ ansible_env.HOME }}/.zshrc"
-    regexp: '^\[ -f ~\/\.fzf\.zsh \] && source ~\/\.fzf\.zsh$'
-    line: "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh"
     create: true
 
 - name: Remove legacy direct powerlevel10k source (conflicts with OMZ theme)

@@ -64,7 +64,6 @@ Applications:
 - Stats
 
 CLI Tools:
-- fzf
 - eza
 
 Fonts:
@@ -79,7 +78,6 @@ Shell Configuration:
   - zsh-autosuggestions
   - zsh-syntax-highlighting
 - Custom aliases
-- fcd directory navigation function
 
 ---
 

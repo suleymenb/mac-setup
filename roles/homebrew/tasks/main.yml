@@ -11,8 +11,8 @@
 - name: Install brew formulae
   community.general.homebrew:
     name:
-      - fzf
       - eza
+      - rust
     state: present
     update_homebrew: false
 
@@ -25,11 +25,3 @@
       - font-jetbrains-mono
       - font-meslo-lg-nerd-font
     state: present
-
-- name: Run fzf install
-  shell: |
-    set -euo pipefail
-    "$(/usr/bin/env brew --prefix)/opt/fzf/install" --all --no-bash --no-fish
-  args:
-    executable: /bin/bash
-  changed_when: false
