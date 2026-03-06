@@ -72,6 +72,13 @@
       zstyle ':omz:update' frequency 1
       COMPLETION_WAITING_DOTS="true"
 
+- name: Add cargo bin to PATH
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    regexp: '^export PATH="\$HOME/\.cargo/bin:\$PATH"'
+    line: 'export PATH="$HOME/.cargo/bin:$PATH"'
+    create: true
+
 # ZSH Aliases & Functions
 - name: Add aliases block (your .zshrc)
   blockinfile:
