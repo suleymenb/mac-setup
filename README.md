@@ -46,7 +46,7 @@ Dev Branch
 
 ```
 git clone -b dev https://github.com/suleymenb/mac-setup.git && cd mac-setup && chmod +x bootstrap/bootstrap.sh && ./bootstrap/bootstrap.sh
-
+```
 
 This will:
 
