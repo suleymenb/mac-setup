@@ -22,6 +22,7 @@
       - iterm2
       - rectangle
       - stats
+      - zed
       - font-jetbrains-mono
       - font-meslo-lg-nerd-font
     state: present
