@@ -173,7 +173,7 @@ You can customize your setup by editing:
 ---
 
 - [ ] TO DO
-  - [ ] 
+  - [ ] brew install ansbile-lint
 
 ---
 
